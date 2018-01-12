@@ -32,6 +32,7 @@ woodImg = pygame.image.load('wood.png')
 stoneImg = pygame.image.load('stone.png')
 waterImg = pygame.image.load('water.png')
 homeImg = pygame.image.load('home.png')
+fireImg = pygame.image.load('fire.png')
 gameIcon = pygame.image.load('grass.png')
 
 pygame.display.set_icon(gameIcon)
@@ -50,9 +51,14 @@ def craft():
     font = pygame.font.SysFont("comicsansms", 25)
     text = font.render("Press 1 To craft small home", True, black)
     gameDisplay.blit(text,(0,45))
+
 def cw():
     font = pygame.font.SysFont("comicsansms", 25)
-    text = font.render("Where builid home ", True, black)
+    text = font.render("You Need To Builid Home ", True, black)
+    gameDisplay.blit(text,(0,45))
+def fr():
+    font = pygame.font.SysFont("comicsansms", 25)
+    text = font.render("You Need To Build Fire ", True, black)
     gameDisplay.blit(text,(0,45))
     
 
@@ -66,6 +72,8 @@ def water(x,y):
     gameDisplay.blit(waterImg,(x,y))
 def home(x4,y4):
     gameDisplay.blit(homeImg,(x4,y4))
+def fire(x5,y5):
+    gameDisplay.blit(fireImg,(x5,y5))
 
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
@@ -182,9 +190,9 @@ def game_loop():
     x3_6 = x3_5 + 100
  
  
-    wcount = 0
+    wcount = 2500
 
-    scount = 0
+    scount = 3800
     gameExit = False
  
     while not gameExit:
@@ -289,7 +297,7 @@ def game_loop():
 
         Stone(scount)
         Wood(wcount)
-        if wcount > 80 and scount > 49:
+        if wcount > 49 and scount > 79 and h == 0:
             craft()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -304,6 +312,14 @@ def game_loop():
                         scount -= 80
                         wcount -= 50
                         h = 1
+        if h == 1:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    #if event.key == pygame.K_2:
+                        #if wcount > 89 and scount > 39:
+                    fr()
+                    fire(100,600)
+                            
         if h == 1:
             home(500,300)  
         
